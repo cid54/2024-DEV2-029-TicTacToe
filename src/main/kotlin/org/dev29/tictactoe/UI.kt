@@ -18,11 +18,10 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
 
     MaterialTheme {
         Column(
-            modifier = Modifier.fillMaxSize().background(Color.Black),
+            modifier = Modifier.fillMaxSize()
         ) {
 
             Row(

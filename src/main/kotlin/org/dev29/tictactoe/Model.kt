@@ -20,7 +20,7 @@ object Game {
     val centerBottomTile = GameTile()
     val rightBottomTile = GameTile()
 
-    val patterns = listOf(
+    private val patterns = listOf(
         // horizontal
         listOf(leftTopTile, centerTopTile, rightTopTile),
         listOf(leftCenterTile, centerCenterTile, rightCenterTile),
@@ -34,12 +34,12 @@ object Game {
         listOf(rightTopTile, centerCenterTile, leftBottomTile)
     )
 
-    val player1 = Player('X')
-    val player2 = Player('O')
+    private val player1 = Player('X')
+    private val player2 = Player('O')
 
     var activePlayer = player1
 
-    var clickCount = 0
+    private var clickCount = 0
 
     var gameDone = false
 
@@ -51,18 +51,17 @@ object Game {
         // You can't win before move 5
         if (clickCount > 4) {
 
-            // Some magic
             // There are only 8 winning patterns, so just check them
             // instead of doing some magic traversal
             val winningPattern = patterns.find { pattern ->
                 pattern.none { it.sign == ' ' }
-                        && pattern
-                    .map { it.sign }
-                    .distinct()
-                    .size == 1
+                        &&
+                        pattern.map { it.sign }
+                            .distinct()
+                            .size == 1
             }
 
-            if(winningPattern != null) {
+            if (winningPattern != null) {
 
                 winningPattern.forEach {
                     it.won.value = true
@@ -97,7 +96,7 @@ class GameTile(
         this.sign = activePlayer.sign
         // Update the game
         nextMove()
-        // Mark tile a clicked
+        // Mark tile as clicked
         this.empty.value = false
 
     }
